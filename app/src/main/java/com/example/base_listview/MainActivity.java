@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     EditText agregaAlista;
     ListView lvLista;
     ArrayList<String> array_list;
+    ArrayList<Integer> array_id;
     ArrayAdapter adaptador;
 
     @Override
@@ -83,19 +85,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // Variable para guardar ID
-    ArrayList<String> listaID = new ArrayList<>();
     private void mostrar_lista() {
-        listaID.clear(); // Limpia los ID del Array
         Base obj = new Base(this,"Productos",null,1);
         SQLiteDatabase objDB = obj.getWritableDatabase();
         array_list = new ArrayList<String>();
+        array_id = new ArrayList<Integer>();
         Cursor cursor = objDB.rawQuery("SELECT * FROM Compras",null);
         cursor.moveToFirst();
         while (cursor.isAfterLast() == false) {
             array_list.add(cursor.getString(cursor.getColumnIndex("id"))
                     + " -" + (cursor.getString(cursor.getColumnIndex("nombre"))));
-            listaID.add(cursor.getString(cursor.getColumnIndex("id")));
+            array_id.add(cursor.getInt(cursor.getColumnIndex("id")));
             cursor.moveToNext();
         }
         adaptador = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, array_list);
@@ -106,7 +106,23 @@ public class MainActivity extends AppCompatActivity {
         lvLista.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent i = new Intent(getApplicationContext())
+                Intent i = new Intent(getApplicationContext(), detalle_item.class);
+                // BASE DE DATOS
+                SQLiteDatabase objDB = obj.getWritableDatabase();
+
+                int idIte = array_id.get(position);
+                String consulta = "SELECT id FROM Compras WHERE id = " + String.valueOf(idIte);
+                Cursor cursor = objDB.rawQuery(consulta,null);
+
+                if (cursor.moveToFirst()) {
+                    int idBD = cursor.getInt(0); // Obtiene ID de la base de datos
+                    i.putExtra("id", idBD);
+                    startActivity(i);
+                } else {
+                    Toast.makeText(MainActivity.this, "No existe registro", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 

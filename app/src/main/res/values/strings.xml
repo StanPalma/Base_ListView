@@ -1,0 +1,10 @@
+<resources>
+<!--    <string name="app_name">Base_ListView</string>-->
+    <string name="app_name">Compras</string>
+    <string name="tvLista">Lista de compras</string>
+    <string name="addProd">Agregar producto a mi lista</string>
+    <string name="agregar">Agregar</string>
+    <string name="borrarLista">Borrar lista</string>
+    <string name="about">Acerca de</string>
+    <string name="salir">Salir</string>
+</resources>

@@ -13,9 +13,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -79,7 +82,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    // Variable para guardar ID
+    ArrayList<String> listaID = new ArrayList<>();
     private void mostrar_lista() {
+        listaID.clear(); // Limpia los ID del Array
         Base obj = new Base(this,"Productos",null,1);
         SQLiteDatabase objDB = obj.getWritableDatabase();
         array_list = new ArrayList<String>();
@@ -88,10 +95,21 @@ public class MainActivity extends AppCompatActivity {
         while (cursor.isAfterLast() == false) {
             array_list.add(cursor.getString(cursor.getColumnIndex("id"))
                     + " -" + (cursor.getString(cursor.getColumnIndex("nombre"))));
+            listaID.add(cursor.getString(cursor.getColumnIndex("id")));
             cursor.moveToNext();
         }
         adaptador = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, array_list);
         lvLista.setAdapter(adaptador);
+
+        // CODIGO PARA CUANDO HACEMOS CLICK EN ITEM, PODER MODIFICARLO O ELIMINARLO
+
+        lvLista.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent i = new Intent(getApplicationContext())
+            }
+        });
+
         objDB.close();
     }
 

@@ -36,7 +36,7 @@
         android:background="#673AB7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLista" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCarnet" />
 
     <EditText
         android:id="@+id/edtAddProd"
@@ -52,20 +52,20 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/btnAgregar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLista" />
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <Button
         android:id="@+id/btnAgregar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:onClick="agregar"
         android:text="@string/agregar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/edtAddProd"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <ListView
         android:id="@+id/lvLista"
@@ -76,5 +76,22 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/edtAddProd"
         app:layout_constraintTop_toBottomOf="@+id/edtAddProd" />
+
+    <TextView
+        android:id="@+id/tvAlumno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/alumno"
+        app:layout_constraintStart_toStartOf="@+id/tvLista"
+        app:layout_constraintTop_toBottomOf="@+id/tvLista" />
+
+    <TextView
+        android:id="@+id/tvCarnet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/carnet"
+        app:layout_constraintStart_toStartOf="@+id/tvAlumno"
+        app:layout_constraintTop_toBottomOf="@+id/tvAlumno" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

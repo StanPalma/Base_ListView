@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         switch (id) {
             case R.id.borrarLista:
                 builder.setTitle("Borrar lista");
-                builder.setMessage("¿Esta seguro que desea eiminar definitivamente la lista?");
+                builder.setMessage("¿Esta seguro que desea eliminar definitivamente la lista?");
                 builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         borrar();
@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void mostrar_lista() {
+        int c = 0;
         Base obj = new Base(this,"Productos",null,1);
         SQLiteDatabase objDB = obj.getWritableDatabase();
         array_list = new ArrayList<String>();
@@ -93,8 +94,10 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor = objDB.rawQuery("SELECT * FROM Compras",null);
         cursor.moveToFirst();
         while (cursor.isAfterLast() == false) {
-            array_list.add(cursor.getString(cursor.getColumnIndex("id"))
-                    + " -" + (cursor.getString(cursor.getColumnIndex("nombre"))));
+            c++;
+            /*array_list.add(cursor.getString(cursor.getColumnIndex("id"))
+                    + " -" + (cursor.getString(cursor.getColumnIndex("nombre"))));*/
+            array_list.add(c + " - " + (cursor.getString(cursor.getColumnIndex("nombre"))));
             array_id.add(cursor.getInt(cursor.getColumnIndex("id")));
             cursor.moveToNext();
         }

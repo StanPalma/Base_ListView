@@ -7,4 +7,8 @@
     <string name="borrarLista">Borrar lista</string>
     <string name="about">Acerca de</string>
     <string name="salir">Salir</string>
+    <string name="Modificar">Modificar</string>
+    <string name="Eliminar">Eliminar</string>
+    <string name="alumno">Bladimir Stanley Palma Portillo</string>
+    <string name="carnet">25-0369-2017</string>
 </resources>
